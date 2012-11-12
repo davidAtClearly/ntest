@@ -1,0 +1,24 @@
+<%try{%>
+<form action="/user/logout" method="post" onsubmit="showLoadingMessage();">
+<input type="submit" value="Logout" />
+</form>
+<div id="gap" />
+<form action="/user/update" method="post" onsubmit="showLoadingMessage();">
+
+First Name: <input type="text" maxlength="60" size="30" name="first_name" value="<%-user.first_name%>" /><br />
+Last Name: <input type="text" maxlength="60" size="30" name="last_name" value="<%-user.last_name%>" /><br />
+Email Address: <input type="text" maxlength="100" size="30" name="email" value="<%-user.email%>" /><br />
+Do you want to be put on our mailing list?<br />
+
+<input type="radio" value="true" name="isOnMailingList" <%-user.custom_fields.isOnMailingList === "true"? "checked='checked'": ""%> /> Yes <br />
+<input type="radio" value="false" name="isOnMailingList"<%-user.custom_fields.isOnMailingList === "false"? "checked='checked'": ""%> /> No <br />
+
+<input type="reset" value="Reset Profile" />&nbsp;<input type="submit" value="Update Profile" />
+
+</form>
+
+<%}catch(ex){%>
+	<script type="text/javascript">
+	document.location = "/index?errorMessage=<%ex%>";
+	</script>
+<%}%>

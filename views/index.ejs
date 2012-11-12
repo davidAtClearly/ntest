@@ -1,0 +1,32 @@
+<input type="button" value="Show Login Form" onclick="showLoginForm()"> &nbsp;<input type="button" value="Show Registration Form" onclick="showRegistrationForm()" /><br />
+
+<div id="loginSection" style="display:none" >
+<form action="/user/login" method="post" onsubmit="showLoadingMessage()">
+Email Address: <input type="text" maxlength="55" size="20" name="login" value="nolemartley@gmail.com" /><br />
+Password: <input type="text" name="password" value="parunga" /><br />
+<input type="submit" value="login" />
+</form>
+</div>
+
+<div id="registrationSection" style="display:none">
+<form action="/user/register" method="post" id="registrationForm">
+<%if(typeof(user) === "undefined"){
+	var user = {
+		custom_fields : {}
+	};
+}%>
+Email Address: <input type="text" maxlength="100" size="30" name="email" value="<%-user.email || ''%>" /><br />
+First Name: <input type="text" maxlength="60" size="30" name="first_name" value="<%-user.first_name || ''%>" /><br />
+Last Name: <input type="text" maxlength="60" size="30" name="last_name" value="<%-user.last_name || ''%>" /><br />
+Password: <input type="password" maxlength="60" size="30" name="password" value="" /><br />
+Password Confirmation: <input type="password" maxlength="60" size="30" name="password_confirmation" value="" /><br />
+
+Do you want to be put on our mailing list?<br />
+<input type="radio" value="true" name="isOnMailingList" <%-user.custom_fields.isOnMailingList? "checked='checked'": ""%> /> Yes <br />
+<input type="radio" value="false" name="isOnMailingList"<%-!user.custom_fields.isOnMailingList? "checked='checked'": ""%> /> No <br />
+
+<input type="reset" value="Reset" />&nbsp;<input type="button" value="Submit" onclick="validateRegistrationForm(getById('registrationForm'))" />
+
+</form>
+
+</div>

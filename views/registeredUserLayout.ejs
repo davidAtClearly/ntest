@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">
+var imagePaths = ["/assets/ajax-loader.gif"];
+function preloadImages(imagePaths){
+	var preloadedImageArray = [];
+	for(var x in imagePaths){
+		preloadedImageArray.push(new Image());
+		preloadedImageArray[x].src = imagePaths[x];
+	}
+}
+</script>
+<script type="text/javascript" src="/javascript/tools.js"></script>
+<script type="text/javascript" src="/jquery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/javascript/blockUI.js"></script>
+<title>NAMDE</title>
+</head>
+<%
+if(typeof(errorMessage) !== "undefined"){
+	if(errorMessage !== null){%>
+<body onload="preloadImages(imagePaths);alert('<%-errorMessage.toString().replace(/'/g,"*")%>')">
+	
+
+<%}else{%>
+	<body onload="preloadImages(imagePaths);">
+	
+<%}
+}else{%>
+	<body onload="preloadImages(imagePaths);">
+	
+<%}%>
+<%- body%>
+
+</body>
+
+</html>
